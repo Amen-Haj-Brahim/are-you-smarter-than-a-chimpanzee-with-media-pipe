@@ -7,9 +7,7 @@ import mediapipe as mp
 width, height = 640, 480
 
 cap = cv.VideoCapture(0)
-cap.set(4, 640)  # width
-cap.set(3, 480)  # height
-
+cap.set(cv.CAP_PROP_FOURCC, cv.VideoWriter.fourcc('M', 'J', 'P', 'G'))
 # Main loop
 start = True
 
@@ -97,7 +95,7 @@ while start:
                         fontScale=0.7,
                         fontFace=cv.FONT_HERSHEY_SIMPLEX,
                     )
-                if round_started:
+                else:
                     img = cv.rectangle(
                         img,
                         pt1=(v[0], v[1]),
@@ -171,7 +169,7 @@ while start:
             fontFace=cv.FONT_HERSHEY_SIMPLEX,
         )
     # ---------game-over-stuff---------------------------------
-    if game_over:
+    else:
         if score > 9:
             img = cv.putText(
                 img,
